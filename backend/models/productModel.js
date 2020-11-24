@@ -38,8 +38,8 @@ const productSchema = mongoose.Schema(
       required: true,
     },
     category: {
-      type: Boolean,
-      default: false,
+      type: String,
+      required: true,
     },
     description: {
       type: String,
