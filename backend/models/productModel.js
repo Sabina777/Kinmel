@@ -39,7 +39,7 @@ const productSchema = mongoose.Schema(
     },
     category: {
       type: Boolean,
-      required: true,
+      default: false,
     },
     description: {
       type: String,
