@@ -2,8 +2,12 @@ import {
   PRODUCT_LIST_REQUEST,
   PRODUCT_LIST_SUCCESS,
   PRODUCT_LIST_FAIL,
+  PRODUCT_DETAIL_REQUEST,
+  PRODUCT_DETAIL_SUCCESS,
+  PRODUCT_DETAIL_FAIL,
 } from "../constants/productConstants";
 
+//reducer for getting all products
 export const productListReducers = (state = { products: [] }, action) => {
   switch (action.type) {
     case PRODUCT_LIST_REQUEST:
@@ -19,6 +23,35 @@ export const productListReducers = (state = { products: [] }, action) => {
       };
 
     case PRODUCT_LIST_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+//reducer for getting a single product
+export const productDetailsReducers = (
+  state = { product: { reviews: [] } },
+  action
+) => {
+  switch (action.type) {
+    case PRODUCT_DETAIL_REQUEST:
+      return {
+        loading: true,
+        ...state,
+      };
+
+    case PRODUCT_DETAIL_SUCCESS:
+      return {
+        loading: false,
+        product: action.payload,
+      };
+
+    case PRODUCT_DETAIL_FAIL:
       return {
         loading: false,
         error: action.payload,

@@ -10,9 +10,8 @@ const HomeScreen = () => {
 
   //get products from redux state
   const productList = useSelector((state) => state.productList);
-
-  //extract from reducers
   const { loading, error, products } = productList;
+  //extract from reducers
 
   useEffect(() => {
     dispatch(listProducts());
