@@ -7,7 +7,6 @@ import Message from "../components/Message";
 import { listProducts } from "../actions/productActions";
 const HomeScreen = () => {
   const dispatch = useDispatch();
-
   //get products from redux state
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;

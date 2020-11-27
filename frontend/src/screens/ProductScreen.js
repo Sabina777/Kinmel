@@ -18,8 +18,9 @@ const ProductScreen = ({ match, history }) => {
   const [qty, setQty] = useState(0);
   const dispatch = useDispatch();
   const productDetail = useSelector((state) => state.productDetail);
-
+  // const history = useHistory();
   const { loading, error, product } = productDetail;
+
   useEffect(() => {
     dispatch(listProductDetails(match.params.id));
   }, [dispatch, match]);
@@ -30,12 +31,19 @@ const ProductScreen = ({ match, history }) => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
   };
 
+  //goback handler functions
+
+  const handleGoBack = () => {
+    history.push("/");
+  };
   return (
     <>
       <Link to="/" className="btn btn-light my-3">
         Go Back
       </Link>
-
+      {/* <button className="btn btn-light my-3" onClick={handleGoBack}>
+        Go Back
+      </button> */}
       {loading ? (
         <Loader />
       ) : error ? (

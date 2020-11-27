@@ -14,9 +14,9 @@ export const cartReducers = (state = { cartItems: [] }, action) => {
         //replace the old item with new item
         return {
           ...state,
-          cartItems: state.cartItems.map((x) => x.product === item.product)
-            ? item
-            : [...state.cartItems],
+          cartItems: state.cartItems.map((x) =>
+            x.product === existItem.product ? item : x
+          ),
         };
       } else {
         //add the whole new item to the cart

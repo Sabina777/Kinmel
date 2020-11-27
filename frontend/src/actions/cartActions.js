@@ -2,9 +2,8 @@ import { CARD_ADD_ITEM, CARD_REMOVE_ITEM } from "../constants/cartConstants";
 import axios from "axios";
 
 //add to cart actions functions
-const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = axios.get(`/api/products/${id}`);
-  //dispatch
+export const addToCart = (id, qty) => async (dispatch, getState) => {
+  const { data } = await axios.get(`/api/products/${id}`);
 
   dispatch({
     type: CARD_ADD_ITEM,
@@ -17,7 +16,6 @@ const addToCart = (id, qty) => async (dispatch, getState) => {
       qty,
     },
   });
-};
 
-//store the items of the cart in local storage
-localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
+};
