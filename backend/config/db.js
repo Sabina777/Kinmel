@@ -2,11 +2,14 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGOURI, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useCreateIndex: true,
-    });
+    const conn = await mongoose.connect(
+      "mongodb+srv://sabina:sabmar-6060@devconnector.vzs3c.mongodb.net/kinmel?retryWrites=true&w=majority",
+      {
+        useUnifiedTopology: true,
+        useNewUrlParser: true,
+        useCreateIndex: true,
+      }
+    );
 
     console.log(`mongoDB connected : ${conn.connection.host}`.cyan.underline);
   } catch (error) {

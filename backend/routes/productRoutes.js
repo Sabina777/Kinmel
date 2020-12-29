@@ -10,7 +10,7 @@ import {
 //there should be only routing details in the route files
 //get all products
 router.route("/").get(getProducts);
-
+    
 //while we are using the controllers file, then we should use router.route instead of get
 
 //get a single product

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 const userSchema = mongoose.Schema(
   {
     name: {
@@ -24,5 +25,10 @@ const userSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+
+//method to check the entered password and password of the database which is in encrypted form
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 const User = mongoose.model("User", userSchema);
 export default User;

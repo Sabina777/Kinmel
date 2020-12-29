@@ -10,7 +10,7 @@ import {
   Card,
 } from "react-bootstrap";
 import Message from "../components/Message";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, removeFromCart } from "../actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
 
 const CartScreen = ({ match, location, history }) => {
@@ -30,7 +30,7 @@ const CartScreen = ({ match, location, history }) => {
 
   //remove cart
   const removeFromCartHandler = (id) => {
-    console.log("item removed from the cart");
+    dispatch(removeFromCart(id));
   };
   useEffect(() => {
     if (productId) {
@@ -62,9 +62,11 @@ const CartScreen = ({ match, location, history }) => {
                   <Col md={2}>
                     <Form.Control
                       as="select"
-                      value={qty}
+                      value={item.qty}
                       onChange={(e) =>
-                        addToCart(item.product, Number(e.target.value))
+                        dispatch(
+                          addToCart(item.product, Number(e.target.value))
+                        )
                       }
                     >
                       {[...Array(item.countInStock).keys()].map((x) => (
@@ -94,7 +96,12 @@ const CartScreen = ({ match, location, history }) => {
         <Card>
           <ListGroup variant="flush">
             <ListGroup.Item>
-              <h2>SubTotal ()Items</h2>
+              <h2>
+                SubTotal({" "}
+                {cartItems.reduce((acc, item) => acc + Number(item.qty), 0)})
+                items
+              </h2>
+              ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)}
             </ListGroup.Item>
           </ListGroup>
         </Card>
