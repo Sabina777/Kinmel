@@ -9,6 +9,7 @@ import {
   Button,
   Card,
 } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 import Message from "../components/Message";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
@@ -102,6 +103,14 @@ const CartScreen = ({ match, location, history }) => {
                 items
               </h2>
               ${cartItems.reduce((acc, item) => acc + item.qty * item.price, 0)}
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <LinkContainer to="/shipping">
+                <Button type="button" variant="dark">
+                  Proceed to Checkout
+                </Button>
+              </LinkContainer>
             </ListGroup.Item>
           </ListGroup>
         </Card>

@@ -9,6 +9,7 @@ import colors from "colors";
 import productRoutes from "./routes/productRoutes.js ";
 import userRoutes from "./routes/userRoutes.js";
 import todoRoutes from "./routes/todoRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 dotenv.config();
 connectDB();
 
@@ -22,6 +23,7 @@ app.get("/", (req, res) => {
 app.use("/api/products", productRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/todos", todoRoutes);
+app.use("/api/orders", orderRoutes);
 //start the server
 
 const PORT = process.env.PORT || 5000;
