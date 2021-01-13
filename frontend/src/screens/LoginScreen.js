@@ -10,28 +10,28 @@ const LoginScreen = ({ location, history }) => {
   //email and password useState
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   //get userlogin from state
   const userLogin = useSelector((state) => state.userLogin);
 
-  const { loading, error, usersInfo } = userLogin;
+  const { loading, error, userInfo } = userLogin;
 
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
-  //useEffect
-  useEffect(() => {
-    if (usersInfo) {
-      console.log(usersInfo);
-      history.push("/");
-    }
-  }, [history, usersInfo, redirect]);
-
   //dispatch
-  const dispatch = useDispatch();
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(login(email, password));
   };
+
+  //useEffect
+  useEffect(() => {
+    if (userInfo) {
+      // console.log(usersInfo);
+      history.push(redirect);
+    }
+  }, [history, userInfo, redirect]);
   return (
     <FormContainer>
       <h1>Sign In</h1>
@@ -59,13 +59,16 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
         <Button type="submit" variant="info">
-          Sign In
+          Sign In{""}
         </Button>
       </Form>
 
       <Row className="py-3">
         <Col>
-          New Customer?<Link to="/register">Register</Link>
+          New Customer?
+          <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
+            Register
+          </Link>
         </Col>
       </Row>
     </FormContainer>

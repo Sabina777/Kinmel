@@ -20,21 +20,21 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { loading, error, user } = userDetails;
 
-  const { usersInfo } = userLogin;
+  const { userInfo } = userLogin;
   const dispatch = useDispatch();
   //useEffect
   useEffect(() => {
-    if (!usersInfo) {
+    if (!userInfo) {
       history.push("/login");
     } else {
-      if (!usersInfo.name) {
+      if (!userInfo.name) {
         dispatch(getUserDetails("profile"));
       } else {
-        setName(usersInfo.name);
-        setEmail(usersInfo.email);
+        setName(userInfo.name);
+        setEmail(userInfo.email);
       }
     }
-  }, [history, usersInfo, user]);
+  }, [history, userInfo, user]);
 
   //dispatch
 
