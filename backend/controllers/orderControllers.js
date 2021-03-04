@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
-import User from "../models/userModel.js";
+// import User from "../models/userModel.js";
 //@desc create new order
 //@route POST /api/orders
 //@access Private
@@ -83,4 +83,14 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItems, getOrderById, updateOrderToPaid };
+//@desc get all the orders
+//@route GET /api/orders
+//@access private admin
+
+const getOrders = asyncHandler(async (req, res) => {
+  //get all orders
+  const orders = await Order.find({}).populate("user", "name email");
+  res.json(orders);
+});
+
+export { addOrderItems, getOrderById, updateOrderToPaid, getOrders };

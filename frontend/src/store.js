@@ -7,6 +7,8 @@ import {
   productDeleteReducers,
   productCreateReducers,
   productUpdateReducers,
+  productReviewCreateReducers,
+  productTopRatedReducers,
 } from "./reducers/productReducers";
 import {
   userLoginReducer,
@@ -23,7 +25,7 @@ import {
   orderPayReducer,
 } from "./reducers/orderReducers";
 import { cartReducers } from "./reducers/cartReducers";
-
+import { machineListReducers } from "./reducers/machineReducers";
 //combine reducer
 const reducer = combineReducers({
   productList: productListReducers,
@@ -31,6 +33,8 @@ const reducer = combineReducers({
   productDelete: productDeleteReducers,
   productCreate: productCreateReducers,
   productUpdate: productUpdateReducers,
+  productCreateReview: productReviewCreateReducers,
+  productTopRated: productTopRatedReducers,
   cart: cartReducers,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
@@ -41,6 +45,7 @@ const reducer = combineReducers({
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
+  machineList: machineListReducers,
 });
 //get cartItems from the localStorage
 

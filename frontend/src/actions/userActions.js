@@ -89,7 +89,7 @@ export const register = (name, email, password) => async (dispatch) => {
 
 //get user details
 
-export const getUserDetails = (id) => async (dispatch, getState) => {
+export const getUserProfile = () => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAIL_REQUEST });
 
@@ -102,7 +102,8 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
-    const { data } = await axios.get(`/api/users/${id}`, config);
+    const { data } = await axios.get("/api/users/profile", config);
+    console.log(data);
     dispatch({ type: USER_DETAIL_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -190,6 +191,34 @@ export const updateUser = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
+      payload: error.response.data.message
+        ? error.response.data.message
+        : error.message,
+    });
+  }
+};
+
+//get user  byd id
+
+export const getUserDetails = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: USER_DETAIL_REQUEST });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+    const { data } = await axios.get(`/api/users/${id}/`, config);
+    console.log(data);
+    dispatch({ type: USER_DETAIL_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_DETAIL_FAIL,
       payload: error.response.data.message
         ? error.response.data.message
         : error.message,

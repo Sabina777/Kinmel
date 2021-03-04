@@ -16,6 +16,13 @@ import {
   PRODUCT_UPDATE_SUCCESS,
   PRODUCT_UPDATE_FAIL,
   PRODUCT_UPDATE_RESET,
+  PRODUCT_CREATE_REVIEW_REQUEST,
+  PRODUCT_CREATE_REVIEW_SUCCESS,
+  PRODUCT_CREATE_REVIEW_FAIL,
+  PRODUCT_CREATE_REVIEW_RESET,
+  PRODUCT_TOP_REQUEST,
+  PRODUCT_TOP_SUCCESS,
+  PRODUCT_TOP_FAIL,
 } from "../constants/productConstants";
 
 //reducer for getting all products
@@ -31,7 +38,9 @@ export const productListReducers = (state = { products: [] }, action) => {
       return {
         loading: false,
         success: true,
-        products: action.payload,
+        products: action.payload.products,
+        pages: action.payload.pages,
+        page: action.payload.page,
       };
 
     case PRODUCT_LIST_FAIL:
@@ -148,6 +157,60 @@ export const productUpdateReducers = (state = { product: {} }, action) => {
       };
     case PRODUCT_UPDATE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+//reducer for creating the product reviews
+export const productReviewCreateReducers = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_CREATE_REVIEW_REQUEST:
+      return {
+        loading: true,
+      };
+
+    case PRODUCT_CREATE_REVIEW_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        product: action.payload,
+      };
+
+    case PRODUCT_CREATE_REVIEW_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case PRODUCT_CREATE_REVIEW_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+//reducer for getting all top rated products
+export const productTopRatedReducers = (state = { products: [] }, action) => {
+  switch (action.type) {
+    case PRODUCT_TOP_REQUEST:
+      return {
+        loading: true,
+        products: [],
+      };
+
+    case PRODUCT_TOP_SUCCESS:
+      return {
+        loading: false,
+
+        products: action.payload,
+      };
+
+    case PRODUCT_TOP_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

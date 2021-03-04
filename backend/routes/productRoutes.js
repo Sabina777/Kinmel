@@ -7,6 +7,8 @@ import {
   deleteProduct,
   createProduct,
   updateProduct,
+  createProductReview,
+  getTopProducts,
 } from "../controllers/productControllers.js";
 
 //use the controller functions in the route files
@@ -15,7 +17,7 @@ import {
 router.route("/").get(getProducts).post(protect, admin, createProduct);
 
 //while we are using the controllers file, then we should use router.route instead of get
-
+router.get("/top", getTopProducts);
 //get a single product
 router
   .route("/:id")
@@ -23,4 +25,5 @@ router
   .delete(deleteProduct)
   .put(protect, admin, updateProduct);
 
+router.route("/:id/reviews").post(protect, createProductReview);
 export default router;

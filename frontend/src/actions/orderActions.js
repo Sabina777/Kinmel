@@ -18,12 +18,12 @@ export const createOrder = (order) => async (dispatch, getState) => {
     dispatch({ type: ORDER_CREATE_REQUEST });
 
     const {
-      userLogin: { usersInfo },
+      userLogin: { userInfo },
     } = getState();
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${usersInfo.token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
     const { data } = await axios.post(`/api/orders/`, order, config);
@@ -43,12 +43,12 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
     dispatch({ type: ORDER_DETAIL_REQUEST });
 
     const {
-      userLogin: { usersInfo },
+      userLogin: { userInfo },
     } = getState();
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${usersInfo.token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
     const { data } = await axios.get(`/api/orders/${id}`, config);
@@ -71,12 +71,12 @@ export const payOrder = (orderId, paymentResult) => async (
     dispatch({ type: ORDER_PAY_REQUEST });
 
     const {
-      userLogin: { usersInfo },
+      userLogin: { userInfo },
     } = getState();
     const config = {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${usersInfo.token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     };
     const { data } = await axios.put(
