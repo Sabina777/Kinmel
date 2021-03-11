@@ -18,7 +18,6 @@ const UserEditScreen = ({ match, history }) => {
 
   const dispatch = useDispatch();
 
-  //get userdetails from the useselector
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
@@ -31,6 +30,8 @@ const UserEditScreen = ({ match, history }) => {
 
   //useEffect
   useEffect(() => {
+
+    
     if (successUpdate) {
       dispatch({ type: USER_UPDATE_RESET });
       history.push("/admin/userList");
